@@ -1,0 +1,23 @@
+{
+  "name": "nova-compile",
+  "version": "1.0.0",
+  "description": "nova dom-module compiler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/melonHuang/nova-compile.git"
+  },
+  "keywords": [
+    "nova",
+    "compiler"
+  ],
+  "author": "melon.H",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melonHuang/nova-compile/issues"
+  },
+  "homepage": "https://github.com/melonHuang/nova-compile#readme"
+}
