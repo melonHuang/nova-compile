@@ -42,9 +42,6 @@ function compile(file, option) {
                         var dirpath = path.dirname(path.resolve(file.path)).split(path.sep);
                         var lastFoldName = dirpath[dirpath.length - 1];
                         return 'Nova.Components.' + utils.capitalize(utils.dashToCamelCase(lastFoldName));
-                    },
-                    root: function(file) {
-                        return 'window';
                     }
                 }
             };
@@ -62,7 +59,7 @@ function compile(file, option) {
                 }
 
                 umdWrap(options, function(err, wrappedScript) {
-                    wrappedScript = '(function() {' + wrappedScript + '}).call(' + (opt.umd && opt.umd.root() || defaultOpt.umd.root()) + ')';
+                    wrappedScript = '(function() {' + wrappedScript + '}).call(window)';
 
                     if(opt.combo) {
                         combo({
