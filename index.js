@@ -41,7 +41,7 @@ function compile(file, option) {
                     exports: function(file) {
                         var dirpath = path.dirname(path.resolve(file.path)).split(path.sep);
                         var lastFoldName = dirpath[dirpath.length - 1];
-                        return utils.capitalize(utils.dashToCamelCase(lastFoldName));
+                        return 'Nova.Components.' + utils.capitalize(utils.dashToCamelCase(lastFoldName));
                     },
                     root: function(file) {
                         return 'window';
