@@ -1,6 +1,6 @@
 {
   "name": "nova-compile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "nova dom-module compiler",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,19 @@
   "bugs": {
     "url": "https://github.com/melonHuang/nova-compile/issues"
   },
-  "homepage": "https://github.com/melonHuang/nova-compile#readme"
+  "homepage": "https://github.com/melonHuang/nova-compile#readme",
+  "dependencies": {
+      "amdclean": "^2.7.0",
+      "autoprefixer": "~6.0.1",
+      "cheerio": "~0.19.0",
+      "clean-css": "^3.4.1",
+      "extend": "^3.0.0",
+      "object.assign": "~3.0.1",
+      "postcss": "~5.0.4",
+      "promise": "^7.0.4",
+      "requirejs": "^2.1.20",
+      "slash": "^1.0.0",
+      "temp": "^0.8.3",
+      "umd-wrap": "^0.1.1"
+  }
 }
