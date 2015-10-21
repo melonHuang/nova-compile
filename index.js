@@ -1,6 +1,5 @@
 'user strict';
 
-var through = require('through2');
 var fs = require('fs');
 var path = require('path');
 var cheerio = require('cheerio');
