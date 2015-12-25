@@ -1,6 +1,6 @@
 {
   "name": "nova-compile",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "nova dom-module compiler",
   "main": "index.js",
   "scripts": {

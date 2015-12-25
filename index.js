@@ -35,30 +35,35 @@ function compile(file, option) {
             return;
         };
 
-        htmlToJs($).then(function(script) {
-            var defaultOpt = {
-                umd: {
-                    exports: function(file) {
-                        var dirpath = path.dirname(path.resolve(file.path)).split(path.sep);
-                        var lastFoldName = dirpath[dirpath.length - 1];
-                        return 'Nova.Components.' + utils.capitalize(utils.dashToCamelCase(lastFoldName));
-                    }
+        var defaultOpt = {
+            umd: {
+                exports: function(file) {
+                    return '__' + i++;
+                    /*
+                    var dirpath = path.dirname(path.resolve(file.path)).split(path.sep);
+                    var lastFoldName = dirpath[dirpath.length - 1];
+                    return 'Nova.Components.' + utils.capitalize(utils.dashToCamelCase(lastFoldName));
+                    */
                 }
-            };
-            var opt = extend({}, defaultOpt, option);
+            },
+            postcss: [prefixer]
+        };
+        var opt = extend({}, defaultOpt, option);
+
+        htmlToJs($, opt).then(function(script) {
 
             var dependencies = parseDependencies($);
 
             // wrap umd
             // combo的实现依赖于UMD
             if(opt.umd || opt.combo) {
-                var options = {
+                var comboOptions = {
                     code: script,
                     exports: getExport($) || (opt.umd && opt.umd.exports(file)) || defaultOpt.umd.exports(file),
                     dependencies: dependencies
                 }
 
-                umdWrap(options, function(err, wrappedScript) {
+                umdWrap(comboOptions, function(err, wrappedScript) {
                     wrappedScript = '(function() {' + wrappedScript + '}).call(window)';
 
                     if(opt.combo) {
@@ -86,7 +91,7 @@ function compile(file, option) {
 }
 
 
-function htmlToJs($) {
+function htmlToJs($, option) {
     var domModule = $('template[is=dom-module]');
 
 
@@ -97,10 +102,11 @@ function htmlToJs($) {
     id = domModule.attr('id');
 
     // clean and prefix css
-    return prefixer.process(style).then(function(result) {
+    return postcss(option.postcss).process(style).then(function(result) {
+    //return prefixer.process(style).then(function(result) {
         var exports = {
-            stylesheet: new CleanCSS().minify(result.css).styles,
-            template: template
+            stylesheet: new CleanCSS().minify(result.css).styles || undefined,
+            template: template || undefined
         }
 
         script = script.replace('Nova(', 'NovaExports(');
